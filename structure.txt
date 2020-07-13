@@ -1,0 +1,65 @@
+Panier => {
+    "id_utilisiateur",
+    "nombre_de_commande",
+    "nombre_de_commande_annulé",
+    "nombre_de_commande_complété",
+}
+
+Commande => {
+   vendeur;
+   id_produit;
+   id_panier;
+   quantité;
+   cout_livraison;
+   cout_achat;
+   cout_total;
+   satisfaite:True | false 
+}
+
+Produit => {
+    "titre",
+    "description",
+    "prix"
+    "prix_promotionnel"
+    "categrorie",
+    "marque",
+    "sous-categrorie",
+    "quantité",
+    "couleur",
+    "longeur",
+    "hauteurs",
+    "poids",
+    "id_espace_vendeur",
+}
+
+Image => {
+   "lien",
+   "id_produit",
+}
+
+utilisateur => {
+    "email+password" => pour l'inscription
+    "nom",
+    "prenom",
+    "numero_telephone",
+    "wilaya",
+    "Daira",
+    "Commune",
+    "adresse_exacte"
+    "genre",
+    "data_naissance",
+    "inscription_complete" true | false 
+    "type" => vendeur ** acheteur
+    "accepter_les_conditions" true | false    
+}
+
+Administrateur {
+    "email",
+    "password"
+}
+
+"espace_vendeur":{
+    "nombre_prduits";
+    "produit_vendu";
+    "id_vendeur",
+}
