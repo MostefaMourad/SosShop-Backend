@@ -33,3 +33,11 @@ Route::prefix('panier')->group(function () {
     Route::patch('/update/{id}', 'ProduitController@update');
     Route::delete('/delete/{id}', 'ProduitController@destroy');
  });
+
+ Route::prefix('commande')->group(function () {
+    Route::get('/', 'CommandeController@index');
+    Route::post('/store', 'CommandeController@store');
+    Route::get('/show/{id}', 'CommandeController@show');
+    Route::patch('/update/{id}', 'CommandeController@update');
+    Route::delete('/delete/{id}', 'CommandeController@destroy');
+ });
