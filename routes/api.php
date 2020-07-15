@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::prefix('panier')->group(function () {
+    Route::get('/', 'PanierController@index');
+    Route::get('/show/{id}', 'PanierController@show');
+    Route::delete('/delete/{id}', 'PanierController@destroy');
+ });
