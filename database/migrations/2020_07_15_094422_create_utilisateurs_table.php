@@ -19,7 +19,7 @@ class CreateUtilisateursTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('nom')->nullable();
-            $table->prenom('prenom')->nullable();
+            $table->string('prenom')->nullable();
             $table->string('telephone')->nullable();
             $table->string('wilaya')->nullable();
             $table->string('daira')->nullable();
