@@ -25,3 +25,11 @@ Route::prefix('panier')->group(function () {
     Route::get('/show/{id}', 'EspaceVendeurController@show');
     Route::delete('/delete/{id}', 'EspaceVendeurController@destroy');
  });
+
+ Route::prefix('produit')->group(function () {
+    Route::get('/', 'ProduitController@index');
+    Route::post('/store', 'ProduitController@store');
+    Route::get('/show/{id}', 'ProduitController@show');
+    Route::patch('/update/{id}', 'ProduitController@update');
+    Route::delete('/delete/{id}', 'ProduitController@destroy');
+ });

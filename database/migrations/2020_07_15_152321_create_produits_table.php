@@ -20,7 +20,7 @@ class CreateProduitsTable extends Migration
             $table->float('prix');
             $table->float('prix_promotionnel');
             $table->string('categorie');
-            $table->string('sous-categorie');
+            $table->string('sous_categorie');
             $table->string('marque');
             $table->integer('quantite');
             $table->string('couleur');
