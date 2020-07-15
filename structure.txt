@@ -23,7 +23,7 @@ Produit => {
     "prix_promotionnel"
     "categrorie",
     "marque",
-    "sous-categrorie",
+    "categrorie",
     "quantité",
     "couleur",
     "longeur",
