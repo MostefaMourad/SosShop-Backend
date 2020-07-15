@@ -19,3 +19,9 @@ Route::prefix('panier')->group(function () {
     Route::get('/show/{id}', 'PanierController@show');
     Route::delete('/delete/{id}', 'PanierController@destroy');
  });
+
+ Route::prefix('espace')->group(function () {
+    Route::get('/', 'EspaceVendeurController@index');
+    Route::get('/show/{id}', 'EspaceVendeurController@show');
+    Route::delete('/delete/{id}', 'EspaceVendeurController@destroy');
+ });
