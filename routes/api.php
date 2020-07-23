@@ -67,3 +67,19 @@ Route::prefix('vendeur')->group(function () {
    Route::get('/show/{id}', 'VendeurController@show');
    Route::delete('/delete/{id}', 'VendeurController@destroy');
 });
+
+Route::prefix('categorie')->group(function () {
+   Route::get('/', 'CategorieController@index');
+   Route::post('/store', 'CategorieController@store');
+   Route::get('/show/{id}', 'CategorieController@show');
+   Route::patch('/update/{id}', 'CategorieController@update');
+   Route::delete('/delete/{id}', 'CategorieController@destroy');
+});
+
+Route::prefix('subcategorie')->group(function () {
+   Route::get('/', 'SubCategorieController@index');
+   Route::post('/store', 'SubCategorieController@store');
+   Route::get('/show/{id}', 'SubCategorieController@show');
+   Route::patch('/update/{id}', 'SubCategorieController@update');
+   Route::delete('/delete/{id}', 'SubCategorieController@destroy');
+});

@@ -24,8 +24,8 @@ class ProduitController extends Controller
         $new_produit->description = $request->description;
         $new_produit->prix = floatval($request->prix);
         $new_produit->prix_promotionnel = floatval($request->prix_promotionnel);
-        $new_produit->categorie = $request->categorie;
-        $new_produit->sous_categorie = $request->sous_categorie;
+        $new_produit->categorie = intval($request->categorie);
+        $new_produit->sub_categorie = intval($request->sub_categorie);
         $new_produit->marque = $request->marque;
         $new_produit->quantite = intval($request->quantite);
         $new_produit->couleur = $request->couleur;
@@ -81,12 +81,6 @@ class ProduitController extends Controller
             }
             if($request->has('prix_promotionnel')){
                 $produit->prix_promotionnel = $request->prix_promotionnel;
-            }
-            if($request->has('categorie')) {
-            $produit->categorie = $request->categorie;
-            }
-            if($request->has('sous_categorie')) {
-            $produit->sous_categorie = $request->sous_categorie;
             }
             if($request->has('marque')){
                 $produit->marque = $request->marque;
