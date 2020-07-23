@@ -18,7 +18,7 @@ class CreateSubCategoriesTable extends Migration
             $table->string('nom');
             $table->integer('categorie_id')->unsigned();
             $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->integer('nombre_produits');
+            $table->integer('nombre_produits')->default(0);
         });
     }
 
