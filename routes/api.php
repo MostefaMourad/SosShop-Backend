@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('acheteur/login', 'API\AcheteurLoginController@login');
+Route::post('acheteur/register', 'API\AcheteurRegisterController@register');
+
+Route::post('vendeur/login', 'API\VendeurLoginController@login');
+Route::post('vendeur/register', 'API\VendeurRegisterController@register');
+
 Route::prefix('panier')->group(function () {
     Route::get('/', 'PanierController@index');
     Route::get('/show/{id}', 'PanierController@show');

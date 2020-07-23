@@ -44,7 +44,22 @@ return [
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
-            'hash' => false,
+        ],
+        'vendeur' => [
+            'driver' => 'session',
+            'provider' => 'vendeurs',
+        ],
+        'vendeur-api' => [
+            'driver' => 'passport',
+            'provider' => 'vendeurs',
+        ],
+        'acheteur' => [
+            'driver' => 'session',
+            'provider' => 'acheteurs',
+        ],
+        'acheteur-api' => [ 
+            'driver' => 'passport',
+            'provider' => 'acheteurs',
         ],
     ],
 
@@ -70,6 +85,14 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+        'vendeurs' => [
+            'driver' => 'eloquent',
+            'model' => App\Vendeur::class,
+        ],
+        'acheteurs' => [
+            'driver' => 'eloquent',
+            'model' => App\Acheteur::class,
+        ], 
 
         // 'users' => [
         //     'driver' => 'database',
@@ -99,6 +122,18 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'vendeurs' => [
+            'provider' => 'vendeurs',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'acheteurs' => [
+            'provider' => 'acheteurs',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ], 
     ],
 
     /*
