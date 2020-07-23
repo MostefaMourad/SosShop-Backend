@@ -28,6 +28,7 @@ class CreateAcheteursTable extends Migration
             $table->boolean('genre')->nullable();
             $table->date('date_naissance')->nullable();
             $table->string('image_profil')->nullable();
+            $table->rememberToken();
             $table->boolean('inscription_complete')->default(false);
         });
     }

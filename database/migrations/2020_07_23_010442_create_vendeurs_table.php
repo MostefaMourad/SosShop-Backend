@@ -22,7 +22,8 @@ class CreateVendeursTable extends Migration
             $table->string('telephone');
             $table->string('adresse');
             $table->date('date_naissance');
-            $table->string('image_profil');
+            $table->string('image_profil')->nullable();
+            $table->rememberToken();
             $table->boolean('inscription_complete')->default(false);
         });
     }
