@@ -41,3 +41,15 @@ Route::prefix('panier')->group(function () {
     Route::patch('/update/{id}', 'CommandeController@update');
     Route::delete('/delete/{id}', 'CommandeController@destroy');
  });
+
+ Route::prefix('acheteur')->group(function () {
+   Route::get('/', 'AcheteurController@index');
+   Route::get('/show/{id}', 'AcheteurController@show');
+   Route::delete('/delete/{id}', 'AcheteurController@destroy');
+});
+
+Route::prefix('vendeur')->group(function () {
+   Route::get('/', 'VendeurController@index');
+   Route::get('/show/{id}', 'VendeurController@show');
+   Route::delete('/delete/{id}', 'VendeurController@destroy');
+});
