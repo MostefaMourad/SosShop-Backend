@@ -19,8 +19,6 @@ class CreateProduitsTable extends Migration
             $table->string('description');
             $table->float('prix');
             $table->float('prix_promotionnel');
-            $table->string('categorie');
-            $table->string('sous_categorie');
             $table->string('marque');
             $table->integer('quantite');
             $table->string('couleur');
@@ -31,6 +29,10 @@ class CreateProduitsTable extends Migration
             $table->json('images');
             $table->integer('espace_vendeur_id')->unsigned();
             $table->foreign('espace_vendeur_id')->references('id')->on('espace_vendeurs')->onDelete('cascade');
+            $table->integer('categorie_id')->unsigned();
+            $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->integer('sub_categorie_id')->unsigned();
+            $table->foreign('sub_categorie_id')->references('id')->on('sub_categories')->onDelete('cascade');
         });
     }
 
