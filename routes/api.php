@@ -17,8 +17,16 @@ use Illuminate\Support\Facades\Route;
 Route::post('acheteur/login', 'API\AcheteurLoginController@login');
 Route::post('acheteur/register', 'API\AcheteurRegisterController@register');
 
+Route::group(['middleware' => 'auth:acheteur-api'], function(){
+   Route::get('acheteur/profil', 'API\AcheteurController@profil');
+});
+
 Route::post('vendeur/login', 'API\VendeurLoginController@login');
 Route::post('vendeur/register', 'API\VendeurRegisterController@register');
+
+Route::group(['middleware' => 'auth:vendeur-api'], function(){
+   Route::get('vendeur/profil', 'API\VendeurController@profil');
+});
 
 Route::prefix('panier')->group(function () {
     Route::get('/', 'PanierController@index');
