@@ -17,8 +17,8 @@ class CreateEspaceVendeursTable extends Migration
             $table->increments('id')->unsigned();
             $table->integer('produits_vendus')->default(0);
             $table->integer('nombre_produits')->default(0);
-            $table->integer('utilisateur_id')->unsigned();
-            $table->foreign('utilisateur_id')->references('id')->on('utilisateurs')->onDelete('cascade');
+            $table->integer('vendeur_id')->unsigned();
+            $table->foreign('vendeur_id')->references('id')->on('vendeurs')->onDelete('cascade');
         });
     }
 

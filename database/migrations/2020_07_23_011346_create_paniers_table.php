@@ -18,8 +18,8 @@ class CreatePaniersTable extends Migration
             $table->integer('commandes')->default(0);
             $table->integer('annule')->default(0);
             $table->integer('complete')->default(0);
-            $table->integer('utilisateur_id')->unsigned();
-            $table->foreign('utilisateur_id')->references('id')->on('utilisateurs')->onDelete('cascade');
+            $table->integer('acheteur_id')->unsigned();
+            $table->foreign('acheteur_id')->references('id')->on('acheteurs')->onDelete('cascade');
         });
     }
 
