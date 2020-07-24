@@ -29,7 +29,7 @@ class AjoutProduitRequest extends FormRequest
             'prix' => 'required|numeric',
             'prix_promotionnel' => 'required|numeric|lte:prix',
             'categorie' => 'required|integer',
-            'sub_categorie' => 'required|integer',
+            'sous_categorie' => 'required|integer',
             'marque' => 'required|string',
             'quantite' => 'required|integer',
             'couleur' => 'required|string',

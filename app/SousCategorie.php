@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SubCategorie extends Model
+class SousCategorie extends Model
 {
     public $timestamps = false;
    

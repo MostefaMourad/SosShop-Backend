@@ -76,10 +76,10 @@ Route::prefix('categorie')->group(function () {
    Route::delete('/delete/{id}', 'CategorieController@destroy');
 });
 
-Route::prefix('subcategorie')->group(function () {
-   Route::get('/', 'SubCategorieController@index');
-   Route::post('/store', 'SubCategorieController@store');
-   Route::get('/show/{id}', 'SubCategorieController@show');
-   Route::patch('/update/{id}', 'SubCategorieController@update');
-   Route::delete('/delete/{id}', 'SubCategorieController@destroy');
+Route::prefix('souscategorie')->group(function () {
+   Route::get('/', 'SousCategorieController@index');
+   Route::post('/store', 'SousCategorieController@store');
+   Route::get('/show/{id}', 'SousCategorieController@show');
+   Route::patch('/update/{id}', 'SousCategorieController@update');
+   Route::delete('/delete/{id}', 'SousCategorieController@destroy');
 });

@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use App\Helpers\APIHelpers;
 use App\Http\Requests\AjoutSubCategorieRequest;
 use App\Http\Requests\UpdateSubCategorieRequest;
-use App\SubCategorie;
+use App\SousCategorie;
 use Illuminate\Http\Request;
 
-class SubCategorieController extends Controller
+class SousCategorieController extends Controller
 {
     public function index()
     {
-        $sub_categories = SubCategorie::all();
+        $sub_categories = SousCategorie::all();
         $response = APIHelpers::createAPIResponse(false, 200, '', $sub_categories);
         return response()->json($response, 200);
     }
@@ -20,7 +20,7 @@ class SubCategorieController extends Controller
     public function store(AjoutSubCategorieRequest $request)
     {
         $input = $request->all();
-        $new_sub_categorie = SubCategorie::create($input);
+        $new_sub_categorie = SousCategorie::create($input);
         $sub_categorie_save = $new_sub_categorie->save();
         if($sub_categorie_save){
             $response = APIHelpers::createAPIResponse(false, 201, 'Ajout avec succés',$new_sub_categorie);
@@ -34,7 +34,7 @@ class SubCategorieController extends Controller
 
     public function show($id)
     {
-        $sub_categorie = SubCategorie::find($id);
+        $sub_categorie = SousCategorie::find($id);
         if ($sub_categorie == null) {
             $response = APIHelpers::createAPIResponse(true, 204, 'sub_categorie introuvable', null);
         } else {
@@ -44,7 +44,7 @@ class SubCategorieController extends Controller
     }
 
     public function update(UpdateSubCategorieRequest $request,$id){
-        $sub_categorie= SubCategorie::find($id);
+        $sub_categorie= SousCategorie::find($id);
         if($sub_categorie!=null){
         {
             if($request->has('nom')) {
@@ -68,7 +68,7 @@ class SubCategorieController extends Controller
     
     public function destroy($id)
     {
-        $sub_categorie = Subcategorie::find($id);
+        $sub_categorie = SousCategorie::find($id);
         if ($sub_categorie == null) {
             $response = APIHelpers::createAPIResponse(true, 400, 'echec sub_categorie Introuvable', null);
             return response()->json($response, 400);

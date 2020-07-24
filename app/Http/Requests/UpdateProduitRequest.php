@@ -29,7 +29,7 @@ class UpdateProduitRequest extends FormRequest
             'prix' => 'nullable|numeric',
             'prix_promotionnel' => 'nullable|numeric|lte:prix',
             'categorie' => 'nullable|integer',
-            'sub_categorie' => 'nullable|integer',
+            'sous_categorie' => 'nullable|integer',
             'marque' => 'nullable|string',
             'quantite' => 'nullable|integer',
             'couleur' => 'nullable|string',

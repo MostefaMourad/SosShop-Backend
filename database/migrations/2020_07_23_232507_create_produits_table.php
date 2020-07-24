@@ -31,8 +31,8 @@ class CreateProduitsTable extends Migration
             $table->foreign('espace_vendeur_id')->references('id')->on('espace_vendeurs')->onDelete('cascade');
             $table->integer('categorie_id')->unsigned();
             $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->integer('sub_categorie_id')->unsigned();
-            $table->foreign('sub_categorie_id')->references('id')->on('sub_categories')->onDelete('cascade');
+            $table->integer('sous_categorie_id')->unsigned();
+            $table->foreign('sous_categorie_id')->references('id')->on('sous_categories')->onDelete('cascade');
         });
     }
 
