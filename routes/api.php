@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('acheteur/login', 'API\AcheteurLoginController@login');
 Route::post('acheteur/register', 'API\AcheteurRegisterController@register');
+Route::post('acheteur/logout', 'API\AcheteurLoginController@logout');
 
 Route::group(['middleware' => 'auth:acheteur-api'], function(){
    Route::get('acheteur/profil', 'API\AcheteurController@profil');
@@ -23,6 +24,7 @@ Route::group(['middleware' => 'auth:acheteur-api'], function(){
 
 Route::post('vendeur/login', 'API\VendeurLoginController@login');
 Route::post('vendeur/register', 'API\VendeurRegisterController@register');
+Route::post('vendeur/logout', 'API\VendeurLoginController@logout');
 
 Route::group(['middleware' => 'auth:vendeur-api'], function(){
    Route::get('vendeur/profil', 'API\VendeurController@profil');

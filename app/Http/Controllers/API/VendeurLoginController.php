@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\APIHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VendeurLoginRequest;
 use Illuminate\Http\Request;
@@ -25,4 +26,11 @@ class VendeurLoginController extends Controller
             return response()->json(['error' => 'Unauthorised'], 401);
         }
     }
+    public function logout (Request $request) {
+
+        $token = $request->user()->token();
+        $token->revoke();
+        $response = APIHelpers::createAPIResponse(false, 200, 'You have been succesfully logged out!', null);
+        return response()->json($response, 200);
+   }
 }
