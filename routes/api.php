@@ -91,3 +91,11 @@ Route::prefix('service')->group(function () {
    Route::patch('/update/{id}', 'ServiceController@update');
    Route::delete('/delete/{id}', 'ServiceController@destroy');
 });
+
+Route::prefix('publicite')->group(function () {
+   Route::get('/', 'PubliciteController@index');
+   Route::post('/store', 'PubliciteController@store');
+   Route::get('/show/{id}', 'PubliciteController@show');
+   Route::patch('/update/{id}', 'PubliciteController@update');
+   Route::delete('/delete/{id}', 'PubliciteController@destroy');
+});
