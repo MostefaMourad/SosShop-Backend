@@ -83,3 +83,11 @@ Route::prefix('souscategorie')->group(function () {
    Route::patch('/update/{id}', 'SousCategorieController@update');
    Route::delete('/delete/{id}', 'SousCategorieController@destroy');
 });
+
+Route::prefix('service')->group(function () {
+   Route::get('/', 'ServiceController@index');
+   Route::post('/store', 'ServiceController@store');
+   Route::get('/show/{id}', 'ServiceController@show');
+   Route::patch('/update/{id}', 'ServiceController@update');
+   Route::delete('/delete/{id}', 'ServiceController@destroy');
+});

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class publicite extends Model
+class Faq extends Model
 {
-    //
+    public $timestamps = false;
 }
