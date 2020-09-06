@@ -96,6 +96,13 @@ Route::prefix('publicite')->group(function () {
    Route::get('/', 'PubliciteController@index');
    Route::post('/store', 'PubliciteController@store');
    Route::get('/show/{id}', 'PubliciteController@show');
-   Route::patch('/update/{id}', 'PubliciteController@update');
    Route::delete('/delete/{id}', 'PubliciteController@destroy');
+});
+
+Route::prefix('faq')->group(function () {
+   Route::get('/', 'FaqController@index');
+   Route::post('/store', 'FaqController@store');
+   Route::get('/show/{id}', 'FaqController@show');
+   Route::patch('/update/{id}', 'FaqController@update');
+   Route::delete('/delete/{id}', 'FaqController@destroy');
 });
