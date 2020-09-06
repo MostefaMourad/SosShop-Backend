@@ -25,7 +25,7 @@ class ProduitController extends Controller
         $new_produit->prix = floatval($request->prix);
         $new_produit->prix_promotionnel = floatval($request->prix_promotionnel);
         $new_produit->categorie = intval($request->categorie);
-        $new_produit->sous_categorie = intval($request->sous_categorie);
+        $new_produit->sous_categorie = intval($request->sous_categorie);        
         $new_produit->marque = $request->marque;
         $new_produit->quantite = intval($request->quantite);
         $new_produit->couleur = $request->couleur;
