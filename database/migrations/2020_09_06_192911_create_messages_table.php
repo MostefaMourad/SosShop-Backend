@@ -17,7 +17,7 @@ class CreateMessagesTable extends Migration
             $table->increments('id')->unsigned();
             $table->string('nom_complet');
             $table->string('email');
-            $table->string('num_commande');
+            $table->integer('num_commande');
             $table->string('sujet');
             $table->string('message');
         });

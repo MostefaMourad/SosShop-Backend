@@ -106,3 +106,10 @@ Route::prefix('faq')->group(function () {
    Route::patch('/update/{id}', 'FaqController@update');
    Route::delete('/delete/{id}', 'FaqController@destroy');
 });
+
+Route::prefix('message')->group(function () {
+   Route::get('/', 'MessageController@index');
+   Route::post('/store', 'MessageController@store');
+   Route::get('/show/{id}', 'MessageController@show');
+   Route::delete('/delete/{id}', 'MessageController@destroy');
+});
