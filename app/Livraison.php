@@ -10,4 +10,8 @@ class Livraison extends Model
         'acheteur_id','nom','prenom','numero','adresse','region','ville','etat'
     ];
     public $timestamps = false;
+    public function commandes()
+    {
+        return $this->hasMany('App\Commande');
+    }
 }

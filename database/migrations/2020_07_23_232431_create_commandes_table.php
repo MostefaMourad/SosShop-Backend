@@ -17,6 +17,7 @@ class CreateCommandesTable extends Migration
             $table->increments('id')->unsigned();
             $table->integer('quantite');
             $table->integer('product_id')->unsigned();
+            $table->enum('etat',['panier','livraison']);
             $table->integer('panier_id')->unsigned()->nullable();
             $table->foreign('panier_id')->references('id')->on('paniers')->onDelete('cascade');
             $table->integer('livraison_id')->unsigned()->nullable();
