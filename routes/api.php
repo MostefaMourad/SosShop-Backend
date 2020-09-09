@@ -115,3 +115,9 @@ Route::prefix('message')->group(function () {
    Route::get('/show/{id}', 'MessageController@show');
    Route::delete('/delete/{id}', 'MessageController@destroy');
 });
+
+Route::prefix('accueil')->group(function () {
+   Route::get('/', 'PublicController@home');
+});
+
+

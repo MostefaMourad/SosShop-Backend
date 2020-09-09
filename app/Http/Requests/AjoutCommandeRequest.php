@@ -27,9 +27,6 @@ class AjoutCommandeRequest extends FormRequest
             'product_id' => 'integer|required|exists:produits,id',
             'panier_id' => 'integer|required|exists:paniers,id',
             'quantite' => 'required|integer',
-            'cout_livraison' => 'required|numeric',
-            'cout_achat' => 'required|numeric',
-            'cout_total' => 'required|numeric',
         ];
     }
 }

@@ -25,9 +25,6 @@ class UpdateCommandeRequest extends FormRequest
     {
         return [
             'quantite' => 'nullable|integer',
-            'cout_livraison' => 'nullable|numeric',
-            'cout_achat' => 'nullable|numeric',
-            'cout_total' => 'nullable|numeric',
             'complete' => 'nullable|boolean',
         ];
     }
