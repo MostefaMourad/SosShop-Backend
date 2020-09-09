@@ -22,7 +22,7 @@ class Vendeur extends Authenticatable
 * @var array
 */
 protected $fillable = [
-    'nom','prenom','telephone','adresse','date_naissance','email', 'password','image_profil'
+    'nom','prenom','telephone','adresse','date_naissance','email', 'password','image_profil','nom_boutique','telephone_sup',
     ];
     /**
     * The attributes that should be hidden for arrays.

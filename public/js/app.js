@@ -1908,7 +1908,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _sidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./_sidebar */ "./resources/js/components/_sidebar.vue");
+/* harmony import */ var _sidebar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./_sidebar */ "./resources/js/components/_sidebar.vue");
 /* harmony import */ var _navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_navbar */ "./resources/js/components/_navbar.vue");
 //
 //
@@ -1936,7 +1936,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Sidebar: _sidebar__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Sidebar: _sidebar__WEBPACK_IMPORTED_MODULE_0__["default"],
     Navbar: _navbar__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {

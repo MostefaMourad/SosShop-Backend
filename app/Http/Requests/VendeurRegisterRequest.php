@@ -27,6 +27,8 @@ class VendeurRegisterRequest extends FormRequest
             'nom' => 'required|string',
             'prenom' => 'required|string',
             'telephone' => 'required|string',
+            'telephone_sup' => 'nullable|string',
+            'nom_boutique' => 'required|string',            
             'adresse' => 'required|string',            
             'date_naissance' => 'required|date',
             'email' => 'required|email|unique:vendeurs,email',
