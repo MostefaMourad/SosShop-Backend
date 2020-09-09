@@ -17,11 +17,11 @@ class CreateCommandesTable extends Migration
             $table->increments('id')->unsigned();
             $table->integer('quantite');
             $table->integer('product_id')->unsigned();
-            $table->enum('etat',['panier','livraison']);
+            $table->enum('etat',['panier','livraison'])->default('panier');
+            $table->string('image');
             $table->integer('panier_id')->unsigned()->nullable();
             $table->foreign('panier_id')->references('id')->on('paniers')->onDelete('cascade');
             $table->integer('livraison_id')->unsigned()->nullable();
-            $table->foreign('livraison_id')->references('id')->on('livraisons')->onDelete('cascade');
         });
     }
 

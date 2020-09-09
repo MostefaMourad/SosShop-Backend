@@ -23,6 +23,8 @@ class CreateVendeursTable extends Migration
             $table->string('adresse');
             $table->date('date_naissance');
             $table->string('image_profil')->nullable();
+            $table->string('nom_boutique');
+            $table->string('description');
             $table->rememberToken();
             $table->boolean('inscription_complete')->default(false);
         });

@@ -23,7 +23,8 @@ class CreateLivraisonsTable extends Migration
             $table->string('adresse');
             $table->string('region');
             $table->string('ville');
-            $table->string('etat'); 
+            $table->string('etat');
+            $table->string('image'); 
         });
     }
 
