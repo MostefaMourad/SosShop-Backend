@@ -1,23 +1,38 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
+  <v-app id="inspire">
+     <sidebar></sidebar>
+    <v-content>
+      <v-container
+        class="fill-height"
+        fluid
+      >
+        <v-layout justify-center>
+            <v-flex shrink>
+                <router-view> </router-view>
+            </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
 
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <v-footer app color="#00adb5">
+      <span>&copy;Tourathi Dashboard</span>
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
-    }
+import Sidebar from "./_sidebar";
+import Navbar from "./_navbar";
+
+
+  export default {
+    components: { Sidebar, Navbar},  
+    data: () => ({
+      drawer: null,
+      auth:false,
+    }),
+    created () {
+      this.$vuetify.theme.dark = true
+    },
+  }
 </script>
