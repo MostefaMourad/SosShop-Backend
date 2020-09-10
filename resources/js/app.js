@@ -9,6 +9,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import Vuetify from '../plugins/vuetify'
+import router from './router'
 
 /**
  * The following block of code may be used to automatically register your
@@ -31,5 +32,6 @@ Vue.component('admin-component', require('./components/AdminComponent.vue').defa
 
 const app = new Vue({
     vuetify:Vuetify,
+    router,
     el: '#app',
 });

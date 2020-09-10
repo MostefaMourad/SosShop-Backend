@@ -1,5 +1,6 @@
 <template>
   <v-app id="inspire">
+    <v-container fluid>
      <sidebar></sidebar>
     <v-content>
       <v-container
@@ -14,9 +15,12 @@
       </v-container>
     </v-content>
 
-    <v-footer app color="#00adb5">
-      <span>&copy;Tourathi Dashboard</span>
-    </v-footer>
+    <v-footer app dark>
+        <v-col align-self="center">
+            <span>&copy; Sos Shop Dashboard - {{ new Date().getFullYear() }} </span>
+        </v-col>
+    </v-footer> 
+    </v-container>
   </v-app>
 </template>
 

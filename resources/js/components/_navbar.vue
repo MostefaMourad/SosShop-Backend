@@ -5,7 +5,7 @@
       clipped-left
       color="#00adb5"
     >
-      <v-toolbar-title>Tourathi</v-toolbar-title>
+      <v-toolbar-title> SOS SHOP </v-toolbar-title>
     </v-app-bar>
      
     </div>
