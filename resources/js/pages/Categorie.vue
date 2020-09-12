@@ -1,6 +1,6 @@
 <template>
 <v-container>
-  <v-data-table
+  <!-- <v-data-table
     :headers="headers"
     :items="users"
     sort-by="user_name"
@@ -58,7 +58,7 @@
     <template v-slot:no-data>
       <v-btn color="#00adb5" @click="initialize">Reset</v-btn>
     </template>
-  </v-data-table>
+  </v-data-table>-->
 </v-container>
 </template>
 
@@ -89,42 +89,11 @@ import axios from 'axios';
       },
     }),
     created () {
-      this.initialize()
+     // this.initialize()
     },
 
     methods: {
-      initialize () {
-          let obj = this;
-          axios.get(`https://tourathi-dz.com/api/admin/users`)
-          .then(function (response) {
-          obj.users = response.data;
-          })
-          .catch(function (error) {  
-          console.log(error);
-          }); 
-      },
-      
-      deleteItem (item) {
-        this.dialog = true ;
-        this.index = this.users.indexOf(item);
-      },
-      close(){
-        this.dialog = true;
-        this.dialog = false;
-      },
-      save(){
-        this.dialog = true;
-        let obj = this;
-          axios.delete(`https://tourathi-dz.com/api/admin/users/delete/${obj.users[obj.index].id}`)
-          .then(function (response) {
-          console.log(response.data);
-          obj.users.splice(obj.index, 1);
-          })
-          .catch(function (error) {    
-          console.log(error);
-          });
-        this.dialog = false;
-      }
+     
     },
   }
 </script>

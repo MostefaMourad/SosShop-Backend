@@ -2,7 +2,7 @@
   <v-app id="inspire">
     <v-container fluid>
      <sidebar></sidebar>
-    <v-content>
+    <v-main>
       <v-container
         class="fill-height"
         fluid
@@ -13,7 +13,7 @@
             </v-flex>
         </v-layout>
       </v-container>
-    </v-content>
+    </v-main>
 
     <v-footer app dark>
         <v-col align-self="center">
@@ -26,11 +26,10 @@
 
 <script>
 import Sidebar from "./_sidebar";
-import Navbar from "./_navbar";
 
 
   export default {
-    components: { Sidebar, Navbar},  
+    components: { Sidebar},  
     data: () => ({
       drawer: null,
       auth:false,

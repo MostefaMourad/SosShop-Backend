@@ -63,3 +63,217 @@ Administrateur {
     "produit_vendu";
     "id_vendeur",
 }
+
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
+require('./bootstrap');
+
+window.Vue = require('vue');
+
+import Vuetify from '../plugins/vuetify'
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter);
+
+import Utilisateur from './pages/Utilisateur'
+import Marker from './pages/Marker'
+import Avis from './pages/Avis'
+import Reponse from './pages/Reponse'
+
+/**
+ * The following block of code may be used to automatically register your
+ * Vue components. It will recursively scan this directory for the Vue
+ * components and automatically register them with their "basename".
+ *
+ * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ */
+
+const routes = [
+    {
+        path:'/admin/utilisateur',
+        component:Utilisateur
+    },
+    {
+        path:'/admin/marker',
+        component:Marker
+    },
+    {
+        path:'/admin/avis',
+        component:Avis
+    },
+    {
+        path:'/admin/reponse',
+        component:Reponse
+    },
+]
+
+const router  = new VueRouter({
+      mode:'hash',
+      routes
+});
+
+// const files = require.context('./', true, /\.vue$/i)
+// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+
+Vue.component('admin-component', require('./components/AdminComponent.vue').default);
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+const app = new Vue({
+    vuetify:Vuetify,
+    el: '#app',
+    router
+});
+
+
+///////////////////////////////
+
+initialize () {
+          let obj = this;
+          axios.get(`http://127.0.0.1:8000/api/acheteur`)
+          .then(function (response) {
+            obj.acheteurs = response.data;
+          })
+          .catch(function (error) {  
+          console.log(error);
+          }); 
+      },
+      deleteItem (item) {
+      /*  this.dialog = true ;
+        this.index = this.avis.indexOf(item);*/
+      },
+      close(){
+        this.dialog = true;
+        this.dialog = false;
+      },
+      save(){
+  /*      this.dialog = true;
+        let obj = this;
+          axios.delete(`https://tourathi-dz.com/api/admin/avis/delete/${obj.avis[obj.index].id}`)
+          .then(function (response) {
+          console.log(response.data);
+          obj.avis.splice(obj.index, 1);
+          })
+          .catch(function (error) {    
+          console.log(error);
+          });
+        this.dialog = false;*/
+      }
+
+      *****************************************
+       initialize () {
+          let obj = this;
+          axios.get(`https://tourathi-dz.com/api/admin/markers`)
+          .then(function (response) {
+          obj.markers = response.data;
+          })
+          .catch(function (error) {  
+          console.log(error);
+          }); 
+      },
+      deleteItem (item) {
+        this.dialog1 = true ;
+        this.index = this.markers.indexOf(item);
+      },
+      close(){
+        this.dialog1 = false;
+        this.dialog = false;
+        let obj = this ;
+        if(obj.edit == false){
+          obj.markers[obj.index].name = obj.editedItem.name;
+          obj.markers[obj.index].description = obj.editedItem.description;
+          obj.markers[obj.index].latitude = obj.editedItem.latitude;
+          obj.markers[obj.index].longitude = obj.editedItem.longitude;
+          obj.edit = true;
+        }
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.formTitle = "Nouveau Marker";
+      },
+      save(){
+
+        let obj = this;
+        
+        if(this.edit === false){
+          axios.patch(`https://tourathi-dz.com/api/admin/markers/update/${obj.markers[obj.index].id}`,obj.editedItem)
+          .then(function (response) {
+          console.log(response.data);
+          })
+          .catch(function (error) {    
+          console.log(error);
+          });
+        }
+        else{
+          const formData = new FormData();
+          let confirmed = true;
+          let error = '';
+          formData.append('name',obj.editedItem.name);
+          formData.append('description',obj.editedItem.description);
+          formData.append('latitude',obj.editedItem.latitude);
+          formData.append('longitude',obj.editedItem.longitude);
+          if(obj.editedItem.image!=null){
+            formData.append('image',obj.editedItem.image);
+          }
+          if(obj.editedItem.name==''){
+             error += 'Le nom du marqueur n\'est pas valide \n';
+             confirmed = false;
+          }
+          if(obj.editedItem.description==''){
+             error += 'La description du marqueur n\'est pas valide \n';
+             confirmed = false; 
+          }
+          if(obj.editedItem.latitude==0){
+             error += 'Latitude  n\'est pas valide \n';
+             confirmed = false;
+          }
+          if(obj.editedItem.longitude==0){
+             error += 'Longitude n\'est pas valide \n';
+             confirmed = false;
+          }
+          if(confirmed){
+          axios.post(`https://tourathi-dz.com/api/admin/markers/store`,formData)
+          .then(function (response) {
+          obj.markers.push(response.data);
+          console.log(response.data);
+          })
+          .catch(function (error) {    
+          console.log(error.response.data.errors);
+          });
+          }
+          else{
+            window.alert(error);
+          }
+        }
+        this.close();
+      },
+      delet(){
+        this.dialog1 = true;
+        let obj = this;
+          axios.delete(`https://tourathi-dz.com/api/admin/markers/delete/${obj.markers[obj.index].id}`)
+          .then(function (response) {
+          console.log(response.data);
+          obj.markers.splice(obj.index, 1);
+          })
+          .catch(function (error) {    
+          console.log(error);
+          });
+        this.dialog1 = false;
+      },
+      editItem(item){
+        this.edit=false;
+        this.formTitle="Modifier Marker";
+        this.index = this.markers.indexOf(item);
+        this.editedItem = Object.assign({}, item);
+        this.dialog = true;
+      }
+    },
+
+    
+    
+

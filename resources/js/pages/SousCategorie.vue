@@ -1,5 +1,5 @@
 <template>
-<v-container>
+<v-container> <!--
   <v-data-table
     :headers="headers"
     :items="reponses"
@@ -54,7 +54,7 @@
     <template v-slot:no-data>
       <v-btn color="#00adb5" @click="initialize">Reset</v-btn>
     </template>
-  </v-data-table>
+  </v-data-table> -->
 </v-container>
 </template>
 
@@ -80,41 +80,11 @@ import axios from 'axios';
       },
     }),
     created () {
-      this.initialize()
+     // this.initialize()
     },
 
     methods: {
-      initialize () {
-          let obj = this;
-          axios.get(`https://tourathi-dz.com/api/admin/reponses`)
-          .then(function (response) {
-          obj.reponses = response.data;
-          })
-          .catch(function (error) {  
-          console.log(error);
-          }); 
-      },
-      deleteItem (item) {
-        this.dialog = true ;
-        this.index = this.reponses.indexOf(item);
-      },
-      close(){
-        this.dialog = true;
-        this.dialog = false;
-      },
-      save(){
-        this.dialog = true;
-        let obj = this;
-          axios.delete(`https://tourathi-dz.com/api/admin/reponses/delete/${obj.reponses[obj.index].id}`)
-          .then(function (response) {
-          console.log(response.data);
-          obj.reponses.splice(obj.index, 1);
-          })
-          .catch(function (error) {    
-          console.log(error);
-          });
-        this.dialog = false;
-      }
+      
     },
   }
 </script>
