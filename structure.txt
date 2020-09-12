@@ -135,16 +135,7 @@ const app = new Vue({
 
 ///////////////////////////////
 
-initialize () {
-          let obj = this;
-          axios.get(`http://127.0.0.1:8000/api/acheteur`)
-          .then(function (response) {
-            obj.acheteurs = response.data;
-          })
-          .catch(function (error) {  
-          console.log(error);
-          }); 
-      },
+
       deleteItem (item) {
       /*  this.dialog = true ;
         this.index = this.avis.indexOf(item);*/

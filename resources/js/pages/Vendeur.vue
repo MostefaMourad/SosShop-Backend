@@ -62,15 +62,14 @@ import axios from 'axios';
   export default {
     data: () => ({
       headers : [
+       {text:'Boutique',align :'left' , value:'nom_boutique'},
        {text:'Nom',align :'left',value:'nom'},
        {text:'Prénom',align :'left',value:'prenom'},
        {text:'Email',align :'left',value:'email'},
        {text:'Téléphone',align :'left',value:'telephone',sortable: false},
-       {text:'Région',align :'left' , value:'region'},
-       {text:'Ville',align :'left' , value:'ville'},
        {text:'Adresse',align :'left' , value:'adresse',sortable: false},
-       {text:'Date Naissance',align :'left' , value:'date_naissance',sortable: false},      
-       {text: 'Actions',align :'center', value: 'actions', sortable: false}
+       {text:'Description',align :'left',value:'description',sortable: false},      
+       {text:'Actions',align :'center', value: 'actions', sortable: false}
      ] ,
       vendeurs: [],
       dialog:false,

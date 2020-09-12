@@ -22,11 +22,10 @@ class CreateVendeursTable extends Migration
             $table->string('telephone');
             $table->string('telephone_sup')->nullable();
             $table->string('adresse');
-            $table->date('date_naissance');
+            $table->date('date_naissance')->nullable();
             $table->string('image_profil')->nullable();
             $table->string('nom_boutique');
             $table->string('description')->nullable();
-            $table->rememberToken();
             $table->boolean('inscription_complete')->default(false);
         });
     }

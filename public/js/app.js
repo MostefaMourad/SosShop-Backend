@@ -2736,6 +2736,10 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       headers: [{
+        text: 'Boutique',
+        align: 'left',
+        value: 'nom_boutique'
+      }, {
         text: 'Nom',
         align: 'left',
         value: 'nom'
@@ -2753,22 +2757,14 @@ __webpack_require__.r(__webpack_exports__);
         value: 'telephone',
         sortable: false
       }, {
-        text: 'Région',
-        align: 'left',
-        value: 'region'
-      }, {
-        text: 'Ville',
-        align: 'left',
-        value: 'ville'
-      }, {
         text: 'Adresse',
         align: 'left',
         value: 'adresse',
         sortable: false
       }, {
-        text: 'Date Naissance',
+        text: 'Description',
         align: 'left',
-        value: 'date_naissance',
+        value: 'description',
         sortable: false
       }, {
         text: 'Actions',
