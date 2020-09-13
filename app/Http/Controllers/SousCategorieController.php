@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Categorie;
 use App\Helpers\APIHelpers;
 use App\Http\Requests\AjoutSubCategorieRequest;
 use App\Http\Requests\UpdateSubCategorieRequest;
 use App\SousCategorie;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SousCategorieController extends Controller
 {
     public function index()
     {
         $sub_categories = SousCategorie::all();
+        foreach ($sub_categories as $subcat) {
+            $subcat->categorie = (Categorie::find($subcat->categorie_id))->nom;
+        }
         $response = APIHelpers::createAPIResponse(false, 200, '', $sub_categories);
         return response()->json($response, 200);
     }
@@ -20,8 +24,17 @@ class SousCategorieController extends Controller
     public function store(AjoutSubCategorieRequest $request)
     {
         $input = $request->all();
+        $input['nombre_produits'] = 0 ;
+        if($request->hasFile('image')){
+            $path = Storage::putFile('ImagesServices', $request->image);
+            $input['image'] = $path;
+        }
+        else {
+            $input['image'] ="";
+        }
         $new_sub_categorie = SousCategorie::create($input);
         $sub_categorie_save = $new_sub_categorie->save();
+        $new_sub_categorie->categorie = (Categorie::find( $new_sub_categorie->categorie_id))->nom;
         if($sub_categorie_save){
             $response = APIHelpers::createAPIResponse(false, 201, 'Ajout avec succés',$new_sub_categorie);
             return response()->json($response, 200);

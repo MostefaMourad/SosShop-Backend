@@ -25,7 +25,8 @@ class AjoutSubCategorieRequest extends FormRequest
     {
         return [
             'nom'=>'required|string',
-            'categorie_id'=>'required|integer|exists:categories,id'
+            'categorie_id'=>'required|integer|exists:categories,id',
+            'image'=>'nullable|image',
         ];
     }
 }
