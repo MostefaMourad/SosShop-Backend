@@ -1,99 +1,216 @@
 <template>
-<v-container>
-  <!-- <v-data-table
+  <v-data-table
     :headers="headers"
-    :items="users"
-    sort-by="user_name"
+    :items="categories"
+    sort-by="calories"
     class="elevation-1"
   >
     <template v-slot:top>
-      <v-toolbar flat >
-        <v-toolbar-title>Mes Utilisateurs</v-toolbar-title>
+      <v-toolbar flat>
+        <v-toolbar-title> Mes Catégories </v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
           vertical
         ></v-divider>
         <v-spacer></v-spacer>
-          <v-dialog light v-model="dialog" max-width="300px">
+        <v-dialog v-model="dialog" max-width="450px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              color="#00adb5"
+              color="#11999e"
               dark
               class="mb-2"
               v-bind="attrs"
               v-on="on"
+            > Ajouter une catégorie </v-btn>
+          </template>
+          <v-card light>
+            <v-card-title>
+              <span class="headline">{{ formTitle }}</span>
+            </v-card-title>
+
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="11" md="11" align="center">
+                    <v-text-field color="#11999e" outlined  v-model="editedItem.nom" label="Nom Catégorie"></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+
+            <v-card-actions>
+                <v-row>
+                  <v-col md="6" align="center">
+                       <v-btn color="grey" text @click="close"> Annuler</v-btn>
+                  </v-col>
+                  <v-col md="6" align="center">
+                       <v-btn color="#11999e" text @click="save">Sauvegarder</v-btn>
+                  </v-col>
+                </v-row>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+         <v-dialog light v-model="dialog1" max-width="350px">
+          <template>
+            <v-btn
+              color="#00adb5"
+              dark
+              class="mb-2"
               v-show="false"
             ></v-btn>
           </template>
           <v-card>
             <v-card-title>
-              <span class="headline"> Supprimer l'Utilisateur ? </span>
+              <span class="headline"> Supprimer la Catégorie ? </span>
             </v-card-title>
             <v-card-text>
-              Si vous poursuivez cette action, vous supprimerez un utilisateur de l'application mobile Tourathi, l'utilisateur n'aura pas accès à son compte, mais les données collectées auprès de l'utilisateur seront enregistrées .
+              Si vous poursuivez cette action, vous supprimerez la catégorie , ainsi, tout les produits associées seront également supprimées .
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="#00adb5" text @click="close">Annuler</v-btn>
-              <v-btn color="red" text @click="save">Supprimer</v-btn>
+              <v-btn color="grey" text @click="close()" >Annuler</v-btn>
+              <v-btn color="red" text @click="del()" >Supprimer</v-btn>
             </v-card-actions>
           </v-card>
-        </v-dialog>  
-    <template v-slot:no-data>
-      <v-btn color="#00adb5" @click="initialize">Reset</v-btn>
-    </template>
+        </v-dialog> 
       </v-toolbar>
     </template>
-    <template v-slot:item.actions="{ item }">  
-        <v-icon
+    <template v-slot:item.actions="{ item }">
+      <v-icon
         medium
-        @click="deleteItem(item)"
+        class="mr-2"
+        color="#11999e"
+        @click="editItem(item)"
+      >
+        mdi-pencil
+      </v-icon>
+      <v-icon
+        medium
         color="red"
+        @click="deleteItem(item)"
       >
         mdi-delete
       </v-icon>
-
     </template>
     <template v-slot:no-data>
-      <v-btn color="#00adb5" @click="initialize">Reset</v-btn>
+      <v-btn color="#11999e" @click="initialize">Reset</v-btn>
     </template>
-  </v-data-table>-->
-</v-container>
+  </v-data-table>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 
   export default {
     data: () => ({
-      headers : [
-       {text:'User Name',align :'left',value:'user_name'},
-       {text:'Age',align :'left',value:'age'},
-       {text:'Lieu Residence',align :'left',sortable:false,value:'lieu_residence'},
-       {text:'Sexe',align :'left',value:'sexe'},
-       {text:'Nombre de Markers Crées',align :'left' ,value:'marker'},
-       {text: 'Actions',align :'center', value: 'actions', sortable: false}
-     ] ,
-      users: [],
       dialog: false,
-      on:null,
-      attrs:null,
-      index:0,
+      dialog1:false,
+      headers: [
+        {
+          text: 'Nom de la Catégorie',
+          align: 'start',
+          value: 'nom',
+        },
+        { text: 'Nombre de Produit dans la catégorie', value: 'nombre_produits'},
+        { text: 'Actions', value: 'actions', sortable: false },
+      ],
+      categories: [],
+      editedIndex: -1,
+      editedItem: {
+        nom: '',
+        nombre_produits: 0,
+      },
       defaultItem: {
-        user_name:"",
-        age:0,
-        lieu_residence:"",
-        sexe:false,
-        marker:0,
+        nom: '',
+        nombre_produits: 0,
       },
     }),
+
+    computed: {
+      formTitle () {
+        return this.editedIndex === -1 ? 'Nouvelle Catégorie' : 'Modifier la Catégorie'
+      },
+    },
+
+    watch: {
+      dialog (val) {
+        val || this.close()
+      },
+    },
+
     created () {
-     // this.initialize()
+      this.initialize()
     },
 
     methods: {
-     
+      initialize () {
+          let obj = this;
+          axios.get(`http://127.0.0.1:8000/api/categorie`)
+          .then(function (response) {
+            obj.categories = response.data.data;
+          })
+          .catch(function (error) {  
+          console.log(error);
+          });
+      },
+
+      editItem (item) {
+        this.editedIndex = this.categories.indexOf(item);
+        this.editedItem = Object.assign({}, item);
+        this.dialog = true;
+      },
+
+      deleteItem (item) {
+        this.editedIndex = this.categories.indexOf(item);
+        this.dialog1 = true;
+      },
+
+      close () {
+        this.dialog = false;
+        this.dialog1 = false;
+        this.$nextTick(() => {
+          this.editedItem = Object.assign({}, this.defaultItem);
+          this.editedIndex = -1;
+        })
+      },
+      save () {
+        let obj = this ;
+        if (this.editedIndex > -1) {
+          axios.patch(`http://127.0.0.1:8000/api/categorie/update/${obj.categories[obj.editedIndex].id}`,{nom:obj.editedItem.nom})
+          .then(function (response) {
+            obj.categories[obj.editedIndex].nom = obj.editedItem.nom;
+            console.log(obj.categories[obj.editedIndex].nom);
+          })
+          .catch(function (error) {    
+            console.log(error);
+          });
+        } else {
+          if(obj.editedItem.nom!=null){
+            axios.post(`http://127.0.0.1:8000/api/categorie/store`,{nom:obj.editedItem.nom})
+            .then(function (response) {
+              obj.categories.push(response.data.data);
+              console.log(response.data);
+            })
+            .catch(function (error) {    
+              console.log(error.response.data.errors);
+            });
+          }
+          }
+        this.close()
+      },
+      del(){
+        let obj = this;
+        axios.delete(`http://127.0.0.1:8000/api/categorie/delete/${obj.categories[obj.editedIndex].id}`)
+        .then(function (response) {
+          console.log(response.data);
+          obj.categories.splice(obj.editedIndex, 1);
+        })
+        .catch(function (error) {  
+        console.log(error);
+        });
+        this.close()
+      }
     },
   }
 </script>

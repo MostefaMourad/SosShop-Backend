@@ -10,7 +10,7 @@ class VendeurController extends Controller
 {
     public function index()
     {
-        $vendeurs = Vendeur::all();
+        $vendeurs = Vendeur::where('id', '!=',1)->get();
         $response = APIHelpers::createAPIResponse(false, 200, '', $vendeurs);
         return response()->json($response, 200);
     }

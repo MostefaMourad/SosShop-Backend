@@ -43,7 +43,16 @@
           <v-icon> mdi-package-variant </v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title> Produits </v-list-item-title>
+            <v-list-item-title> Produits (Partenaires) </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item to="/admin/produitsos">
+          <v-list-item-action>
+          <v-icon> mdi-shopping </v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title> Produits (Sos Shop) </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -59,7 +68,7 @@
          
         <v-list-item to="/admin/commande">
           <v-list-item-action>
-            <v-icon> mdi-shopping </v-icon>
+            <v-icon> mdi-cart </v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title> Commandes (Panier) </v-list-item-title>

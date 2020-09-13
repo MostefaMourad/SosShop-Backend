@@ -14,6 +14,8 @@ import Publicite from './../pages/Publicite'
 import Service from './../pages/Service'
 import SousCategorie from './../pages/SousCategorie'
 import Vendeur from './../pages/Vendeur'
+import ProduitSos from './../pages/ProduitSos'
+
 
 const routes = [
     {
@@ -59,6 +61,10 @@ const routes = [
     {
         path:'/admin/vendeur',
         component:Vendeur
+    },
+    {
+        path:'/admin/produitsos',
+        component:ProduitSos
     },
 ]
 

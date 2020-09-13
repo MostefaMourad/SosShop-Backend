@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Mer 09 Septembre 2020 à 21:35
+-- Généré le :  Sam 12 Septembre 2020 à 22:50
 -- Version du serveur :  5.7.30-0ubuntu0.18.04.1
 -- Version de PHP :  7.0.33-29+ubuntu18.04.1+deb.sury.org+1
 
@@ -29,20 +29,16 @@ SET time_zone = "+00:00";
 CREATE TABLE `acheteurs` (
   `id` int(10) UNSIGNED NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nom` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `prenom` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `telephone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `wilaya` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `daira` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `commune` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `telephone_sup` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `region` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ville` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `adresse` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `genre` tinyint(1) DEFAULT NULL,
-  `date_naissance` date DEFAULT NULL,
-  `image_profil` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `inscription_complete` tinyint(1) NOT NULL DEFAULT '0'
+  `date_naissance` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -209,7 +205,7 @@ CREATE TABLE `oauth_access_tokens` (
 --
 
 INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
-('c4c12191d2f6104ce19154ae79978e69bdc711c003bfc1c8496597fe9c75b7d4a4eba299a6ad70cc', 1, 1, 'My Vendeur', '[]', 0, '2020-09-09 18:33:39', '2020-09-09 18:33:39', '2021-09-09 19:33:39');
+('2ba175d86e63dac9007a92b2a0243f362a928a99c41c477b531070ebcd48eed823dd0fc8512815b6', 1, 1, 'My Vendeur', '[]', 0, '2020-09-12 19:45:21', '2020-09-12 19:45:21', '2021-09-12 20:45:21');
 
 -- --------------------------------------------------------
 
@@ -251,8 +247,8 @@ CREATE TABLE `oauth_clients` (
 --
 
 INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `provider`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Laravel Personal Access Client', 'EyG3ycuux8ulBfjNo6zNQd2nq0vnyTXXf4kSdg2Y', NULL, 'http://localhost', 1, 0, 0, '2020-09-09 18:33:34', '2020-09-09 18:33:34'),
-(2, NULL, 'Laravel Password Grant Client', 'L00vb6Vgib9omjsv3IGYB9N9CZPc6Sa38Nhh43l9', 'users', 'http://localhost', 0, 1, 0, '2020-09-09 18:33:34', '2020-09-09 18:33:34');
+(1, NULL, 'Laravel Personal Access Client', 'fnWzYCswZATaQYOCkbwsfC64GeaVKyfWtoL2QyF9', NULL, 'http://localhost', 1, 0, 0, '2020-09-12 19:35:54', '2020-09-12 19:35:54'),
+(2, NULL, 'Laravel Password Grant Client', 'RkMqNng2FytK1QM4xPvq1swsdmRjDmmI1vZRxZkN', 'users', 'http://localhost', 0, 1, 0, '2020-09-12 19:35:54', '2020-09-12 19:35:54');
 
 -- --------------------------------------------------------
 
@@ -272,7 +268,7 @@ CREATE TABLE `oauth_personal_access_clients` (
 --
 
 INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
-(1, 1, '2020-09-09 18:33:34', '2020-09-09 18:33:34');
+(1, 1, '2020-09-12 19:35:54', '2020-09-12 19:35:54');
 
 -- --------------------------------------------------------
 
@@ -403,7 +399,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'SosShop', 'contact@sosbusiness.dz', NULL, '$2y$10$3zs/eJ1mCwH7IZTFr4Y9ouxh4emgQ1LJeTm77e3QB6vsplWnZyO.S', NULL, '2020-09-09 18:34:52', '2020-09-09 18:34:52');
+(1, 'SosShop', 'contact@sosbusiness.dz', NULL, '$2y$10$vOLsc1ZBuu2l6U/tVpPlWuZIZUk7jlPy.tws6pJ/QsyD9VLsSyLVK', NULL, '2020-09-12 19:43:57', '2020-09-12 19:43:57');
 
 -- --------------------------------------------------------
 
@@ -420,11 +416,10 @@ CREATE TABLE `vendeurs` (
   `telephone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `telephone_sup` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `adresse` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date_naissance` date NOT NULL,
+  `date_naissance` date DEFAULT NULL,
   `image_profil` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nom_boutique` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `inscription_complete` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -432,8 +427,8 @@ CREATE TABLE `vendeurs` (
 -- Contenu de la table `vendeurs`
 --
 
-INSERT INTO `vendeurs` (`id`, `email`, `password`, `nom`, `prenom`, `telephone`, `telephone_sup`, `adresse`, `date_naissance`, `image_profil`, `nom_boutique`, `description`, `remember_token`, `inscription_complete`) VALUES
-(1, 'contact@sosbusiness.dz', '$2y$10$coJzpm7yBBXePrb8L/U3Xe9M5pC2OiUTsF4x0V5KxorMaiCM2KS/a', 'SosShop', 'SosShop', '0558687379', NULL, 'SosShop', '2020-10-01', NULL, 'SosShop', NULL, NULL, 0);
+INSERT INTO `vendeurs` (`id`, `email`, `password`, `nom`, `prenom`, `telephone`, `telephone_sup`, `adresse`, `date_naissance`, `image_profil`, `nom_boutique`, `description`, `inscription_complete`) VALUES
+(1, 'contact@sosbusiness.dz', '$2y$10$Yu1J.6eIZD4.0976nE/AyOT.MOcNZTBxXAoqkfkNp0uxO0DKwisuO', 'SosShop', 'SosShop', '0558687379', NULL, 'SosShop', '2020-10-01', NULL, 'SosShop', NULL, 0);
 
 --
 -- Index pour les tables exportées

@@ -20,6 +20,7 @@ class CategorieController extends Controller
     public function store(AjoutCategorieRequest $request)
     {
         $input = $request->all();
+        $input['nombre_produits'] = 0;
         $new_categorie = Categorie::create($input);
         $categorie_save = $new_categorie->save();
         if($categorie_save){

@@ -8,14 +8,14 @@
   >
     <template v-slot:top>
       <v-toolbar flat >
-        <v-toolbar-title>Les Clients de Sos Shop (vendeurs) </v-toolbar-title>
+        <v-toolbar-title>Les Partenaires de Sos Shop (vendeurs) </v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
           vertical 
         ></v-divider>
         <v-spacer></v-spacer>
-          <v-dialog light v-model="dialog" max-width="300px">
+          <v-dialog light v-model="dialog" max-width="350px">
           <template>
             <v-btn
               color="#00adb5"
@@ -26,10 +26,10 @@
           </template>
           <v-card>
             <v-card-title>
-              <span class="headline"> Supprimer le Client (l'Acheteur) ? </span>
+              <span class="headline"> Supprimer le Partenaire (le Vendeur ) ? </span>
             </v-card-title>
             <v-card-text>
-              Si vous poursuivez cette action, vous supprimerez un client Sos Shop , ainsi, toutes les commandes associées seront également supprimées , de plus l'utilisateur n'aura plus accés a son compte .
+              Si vous poursuivez cette action, vous supprimerez un partenaire Sos Shop , ainsi, tout les produits , commandes et livraisons associées à ce partenaire seront également supprimées , de plus l'utilisateur n'aura plus accés a son compte .
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -103,6 +103,7 @@ import axios from 'axios';
       deleteItem (item) {
         this.dialog = true ;
         this.index = this.vendeurs.indexOf(item);
+        console.log(this.vendeurs[this.index].id);
       },
       save(){
         this.dialog = false ;

@@ -8,7 +8,7 @@ class Categorie extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'nom',
+        'nom','nombre_produits',
     ];
     public function subcategories()
     {

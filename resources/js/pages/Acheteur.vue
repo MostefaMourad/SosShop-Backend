@@ -15,7 +15,7 @@
           vertical 
         ></v-divider>
         <v-spacer></v-spacer>
-          <v-dialog light v-model="dialog" max-width="300px">
+          <v-dialog light v-model="dialog" max-width="350px">
           <template>
             <v-btn
               color="#00adb5"
