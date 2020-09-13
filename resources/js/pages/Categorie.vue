@@ -30,13 +30,7 @@
             </v-card-title>
 
             <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="11" md="11" align="center">
-                    <v-text-field color="#11999e" outlined  v-model="editedItem.nom" label="Nom Catégorie"></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
+              <v-text-field color="#11999e" outlined  v-model="editedItem.nom" label="Nom Catégorie"></v-text-field>
             </v-card-text>
 
             <v-card-actions>
