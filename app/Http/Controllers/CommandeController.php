@@ -2,15 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Acheteur;
 use App\Commande;
 use App\Helpers\APIHelpers;
 use App\Http\Requests\AjoutCommandeRequest;
 use App\Http\Requests\UpdateCommandeRequest;
+use App\Panier;
+use App\Produit;
+
 class CommandeController extends Controller
 {
     public function index()
     {
         $commandes = Commande::all();
+        foreach ($commandes as $commande) {
+            $user = Acheteur::find($commande->panier_id);
+            $commande->nom = $user->nom;
+            $commande->prenom = $user->prenom;
+            $commande->prix = (Produit::find($commande->product_id))->prix ;
+        }
         $response = APIHelpers::createAPIResponse(false, 200, '', $commandes);
         return response()->json($response, 200);
     }

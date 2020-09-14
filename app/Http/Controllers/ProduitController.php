@@ -13,7 +13,10 @@ class ProduitController extends Controller
     public function index()
     {
         $produits = Produit::all();
-        $response = APIHelpers::createAPIResponse(false, 200, '', $produits);
+        $filtered = $produits->filter(function ($produit) {
+            return $produit->espace_vendeur_id != 1;
+        })->values();        
+        $response = APIHelpers::createAPIResponse(false, 200, '',$filtered);
         return response()->json($response, 200);
     }
 
