@@ -44,6 +44,7 @@ Route::prefix('panier')->group(function () {
 
  Route::prefix('produit')->group(function () {
     Route::get('/', 'ProduitController@index');
+    Route::get('/sos', 'ProduitController@indexs');
     Route::post('/store', 'ProduitController@store');
     Route::get('/show/{id}', 'ProduitController@show');
     Route::patch('/update/{id}', 'ProduitController@update');

@@ -20,6 +20,16 @@ class ProduitController extends Controller
         return response()->json($response, 200);
     }
 
+    public function indexs()
+    {
+        $produits = Produit::all();
+        $filtered = $produits->filter(function ($produit) {
+            return $produit->espace_vendeur_id == 1;
+        })->values();        
+        $response = APIHelpers::createAPIResponse(false, 200, '',$filtered);
+        return response()->json($response, 200);
+    }
+
     public function store(AjoutProduitRequest $request)
     {
         $new_produit = new Produit();
@@ -27,8 +37,8 @@ class ProduitController extends Controller
         $new_produit->description = $request->description;
         $new_produit->prix = floatval($request->prix);
         $new_produit->prix_promotionnel = floatval($request->prix_promotionnel);
-        $new_produit->categorie = intval($request->categorie);
-        $new_produit->sous_categorie = intval($request->sous_categorie);        
+        $new_produit->categorie_id = intval($request->categorie_id);
+        $new_produit->sous_categorie_id = intval($request->sous_categorie_id);        
         $new_produit->marque = $request->marque;
         $new_produit->quantite = intval($request->quantite);
         $new_produit->couleur = $request->couleur;

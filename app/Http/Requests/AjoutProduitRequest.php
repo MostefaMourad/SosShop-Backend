@@ -28,8 +28,8 @@ class AjoutProduitRequest extends FormRequest
             'description' => 'required|string',
             'prix' => 'required|numeric',
             'prix_promotionnel' => 'required|numeric|lte:prix',
-            'categorie' => 'required|integer|exists:categories,id',
-            'sous_categorie' => 'required|integer|exists:sous_categries,id',
+            'categorie_id' => 'required|integer|exists:categories,id',
+            'sous_categorie_id' => 'required|integer|exists:sous_categories,id',
             'marque' => 'required|string',
             'quantite' => 'required|integer',
             'couleur' => 'required|string',
@@ -38,8 +38,8 @@ class AjoutProduitRequest extends FormRequest
             'hauteur' => 'required|numeric',
             'poids' => 'required|numeric',
             'espace_vendeur_id' => 'integer|required|exists:espace_vendeurs,id',
+            'image' => 'required|array',
             'image.*' => 'image|dimensions:min_width=200,min_height=100',
-            'image' => 'nullable|array'
         ];
     }
 }
