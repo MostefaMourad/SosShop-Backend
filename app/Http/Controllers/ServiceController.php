@@ -54,6 +54,9 @@ class ServiceController extends Controller
         $service= Service::find($id);
         if($service!=null){
         {
+            if($request->has('partenaire')) {
+            $service->partenaire = $request->partenaire;
+            }
             if($request->has('numero')) {
             $service->numero = $request->numero;
             }

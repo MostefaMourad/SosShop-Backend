@@ -2,7 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="categories"
-    sort-by="calories"
+    sort-by="nom"
     class="elevation-1"
   >
     <template v-slot:top>

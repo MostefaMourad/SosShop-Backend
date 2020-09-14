@@ -90,7 +90,7 @@ Route::prefix('service')->group(function () {
    Route::get('/', 'ServiceController@index');
    Route::post('/store', 'ServiceController@store');
    Route::get('/show/{id}', 'ServiceController@show');
-   Route::patch('/update/{id}', 'ServiceController@update');
+   Route::post('/update/{id}', 'ServiceController@update');
    Route::delete('/delete/{id}', 'ServiceController@destroy');
 });
 
