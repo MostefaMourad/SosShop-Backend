@@ -3159,13 +3159,269 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dialog: false,
+      dialog1: false,
+      dialog2: false,
+      headers: [{
+        text: 'Titre',
+        value: 'titre'
+      }, {
+        text: 'Sous-Titre',
+        align: 'start',
+        value: 'sous_titre'
+      }, {
+        text: 'Type',
+        value: 'type'
+      }, {
+        text: 'Actions',
+        value: 'actions',
+        sortable: false
+      }],
+      publicites: [],
+      types: ['Pub Principale', 'Pub Secondaire(deuxième)', 'Pub Secondaire(troisième)'],
+      typeD: ['first', 'second', 'third'],
+      editedIndex: -1,
+      editedItem: {
+        titre: '',
+        sous_titre: '',
+        type: '',
+        image: null
+      },
+      defaultItem: {
+        titre: '',
+        sous_titre: '',
+        type: '',
+        image: null
+      }
+    };
+  },
+  computed: {
+    imageUrl: function imageUrl() {
+      if (this.editedIndex > -1) {
+        return 'http://127.0.0.1:8000/public/images' + this.editedItem.image;
+      }
+
+      return "";
+    }
+  },
+  watch: {
+    dialog: function dialog(val) {
+      val || this.close();
+    }
+  },
+  created: function created() {
+    this.initialize();
+  },
+  methods: {
+    initialize: function initialize() {
+      var obj = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/publicite").then(function (response) {
+        obj.publicites = response.data.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    deleteItem: function deleteItem(item) {
+      this.editedIndex = this.publicites.indexOf(item);
+      this.dialog1 = true;
+    },
+    viewImage: function viewImage(item) {
+      this.editedIndex = this.publicites.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog2 = true;
+    },
+    close: function close() {
+      var _this = this;
+
+      this.dialog = false;
+      this.dialog1 = false;
+      this.dialog2 = false;
+      this.$nextTick(function () {
+        _this.editedItem = Object.assign({}, _this.defaultItem);
+        _this.editedIndex = -1;
+      });
+    },
+    save: function save() {
+      var obj = this;
+
+      if (this.editedIndex < 0) {
+        if (obj.editedItem.partenaire != '' && obj.editedItem.titre != '' && obj.editedItem.description != '' && obj.editedItem.numero != '' && obj.editedItem.prix != 0) {
+          var formData = new FormData();
+          formData.append('titre', obj.editedItem.titre);
+          formData.append('sous_titre', obj.editedItem.sous_titre);
+          formData.append('type', obj.typeD[obj.types.indexOf(obj.editedItem.type)]);
+
+          if (obj.editedItem.image != null) {
+            formData.append('image', obj.editedItem.image);
+          }
+
+          axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://127.0.0.1:8000/api/publicite/store", formData).then(function (response) {
+            obj.publicites.push(response.data.data);
+            console.log(response.data);
+          })["catch"](function (error) {
+            console.log(error.response.data.errors);
+          });
+        }
+      }
+
+      this.close();
+    },
+    del: function del() {
+      var obj = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("http://127.0.0.1:8000/api/publicite/delete/".concat(obj.publicites[obj.editedIndex].id)).then(function (response) {
+        console.log(response.data);
+        obj.publicites.splice(obj.editedIndex, 1);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      this.close();
+    }
+  }
+});
 
 /***/ }),
 
@@ -43590,7 +43846,400 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("v-data-table", {
+    staticClass: "elevation-1",
+    attrs: { headers: _vm.headers, items: _vm.publicites, "sort-by": "titre" },
+    scopedSlots: _vm._u([
+      {
+        key: "top",
+        fn: function() {
+          return [
+            _c(
+              "v-toolbar",
+              { attrs: { flat: "" } },
+              [
+                _c("v-toolbar-title", [_vm._v(" Mes Publicites ")]),
+                _vm._v(" "),
+                _c("v-divider", {
+                  staticClass: "mx-4",
+                  attrs: { inset: "", vertical: "" }
+                }),
+                _vm._v(" "),
+                _c("v-spacer"),
+                _vm._v(" "),
+                _c(
+                  "v-dialog",
+                  {
+                    attrs: { "max-width": "450px" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "activator",
+                        fn: function(ref) {
+                          var on = ref.on
+                          var attrs = ref.attrs
+                          return [
+                            _c(
+                              "v-btn",
+                              _vm._g(
+                                _vm._b(
+                                  {
+                                    staticClass: "mb-2",
+                                    attrs: { color: "#11999e", dark: "" }
+                                  },
+                                  "v-btn",
+                                  attrs,
+                                  false
+                                ),
+                                on
+                              ),
+                              [_vm._v(" Ajouter une Publicité ")]
+                            )
+                          ]
+                        }
+                      }
+                    ]),
+                    model: {
+                      value: _vm.dialog,
+                      callback: function($$v) {
+                        _vm.dialog = $$v
+                      },
+                      expression: "dialog"
+                    }
+                  },
+                  [
+                    _vm._v(" "),
+                    _c(
+                      "v-card",
+                      { attrs: { light: "" } },
+                      [
+                        _c("v-card-title", [
+                          _c("span", { staticClass: "headline" }, [
+                            _vm._v(" Nouvelle Publicité ")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "v-card-text",
+                          [
+                            _c("v-text-field", {
+                              attrs: {
+                                color: "#11999e",
+                                outlined: "",
+                                label: "Titre"
+                              },
+                              model: {
+                                value: _vm.editedItem.titre,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.editedItem, "titre", $$v)
+                                },
+                                expression: "editedItem.titre"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-text-field", {
+                              attrs: {
+                                color: "#11999e",
+                                outlined: "",
+                                label: "Sous Titre"
+                              },
+                              model: {
+                                value: _vm.editedItem.sous_titre,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.editedItem, "sous_titre", $$v)
+                                },
+                                expression: "editedItem.sous_titre"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-select", {
+                              attrs: {
+                                items: _vm.types,
+                                label: "Type",
+                                outlined: "",
+                                color: "#11999e"
+                              },
+                              model: {
+                                value: _vm.editedItem.type,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.editedItem, "type", $$v)
+                                },
+                                expression: "editedItem.type"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("v-file-input", {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.editedIndex < 0,
+                                  expression: "editedIndex < 0"
+                                }
+                              ],
+                              attrs: {
+                                color: "#11999e",
+                                accept: "image/png, image/jpeg, image/bmp",
+                                "prepend-icon": "mdi-camera",
+                                label: "Photo du Publicite"
+                              },
+                              model: {
+                                value: _vm.editedItem.image,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.editedItem, "image", $$v)
+                                },
+                                expression: "editedItem.image"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-row",
+                          [
+                            _c(
+                              "v-col",
+                              { attrs: { md: "6", align: "center" } },
+                              [
+                                _c(
+                                  "v-btn",
+                                  {
+                                    attrs: { color: "grey", text: "" },
+                                    on: { click: _vm.close }
+                                  },
+                                  [_vm._v(" Annuler")]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-col",
+                              { attrs: { md: "6", align: "center" } },
+                              [
+                                _c(
+                                  "v-btn",
+                                  {
+                                    attrs: { color: "#11999e", text: "" },
+                                    on: { click: _vm.save }
+                                  },
+                                  [_vm._v("Sauvegarder")]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-dialog",
+                  {
+                    attrs: { light: "", "max-width": "400px" },
+                    model: {
+                      value: _vm.dialog1,
+                      callback: function($$v) {
+                        _vm.dialog1 = $$v
+                      },
+                      expression: "dialog1"
+                    }
+                  },
+                  [
+                    [
+                      _c("v-btn", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: false,
+                            expression: "false"
+                          }
+                        ],
+                        staticClass: "mb-2",
+                        attrs: { color: "#00adb5", dark: "" }
+                      })
+                    ],
+                    _vm._v(" "),
+                    _c(
+                      "v-card",
+                      [
+                        _c("v-card-title", [
+                          _c("span", { staticClass: "headline" }, [
+                            _vm._v(" Supprimer la Publicite ? ")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("v-card-text", [
+                          _vm._v(
+                            "\n            Si vous poursuivez cette action, vous supprimerez la publicite définitivement .\n          "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "v-card-actions",
+                          [
+                            _c("v-spacer"),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: { color: "grey", text: "" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.close()
+                                  }
+                                }
+                              },
+                              [_vm._v("Annuler")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: { color: "red", text: "" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.del()
+                                  }
+                                }
+                              },
+                              [_vm._v("Supprimer")]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-dialog",
+                  {
+                    attrs: { light: "", "max-width": "400px" },
+                    model: {
+                      value: _vm.dialog2,
+                      callback: function($$v) {
+                        _vm.dialog2 = $$v
+                      },
+                      expression: "dialog2"
+                    }
+                  },
+                  [
+                    [
+                      _c("v-btn", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: false,
+                            expression: "false"
+                          }
+                        ],
+                        staticClass: "mb-2",
+                        attrs: { color: "#00adb5", dark: "" }
+                      })
+                    ],
+                    _vm._v(" "),
+                    _c(
+                      "v-card",
+                      [
+                        _vm._v("\n              \n          "),
+                        _c("v-card-text", [
+                          _c("img", {
+                            attrs: { src: _vm.imageUrl, alt: "Profile Photo" }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "v-card-actions",
+                          [
+                            _c("v-spacer"),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: { color: "grey", text: "" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.close()
+                                  }
+                                }
+                              },
+                              [_vm._v(" Fermer ")]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  2
+                )
+              ],
+              1
+            )
+          ]
+        },
+        proxy: true
+      },
+      {
+        key: "item.actions",
+        fn: function(ref) {
+          var item = ref.item
+          return [
+            _c(
+              "v-icon",
+              {
+                attrs: { medium: "", color: "primary" },
+                on: {
+                  click: function($event) {
+                    return _vm.viewImage(item)
+                  }
+                }
+              },
+              [_vm._v("\n      mdi-image-area\n    ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "v-icon",
+              {
+                attrs: { medium: "", color: "red" },
+                on: {
+                  click: function($event) {
+                    return _vm.deleteItem(item)
+                  }
+                }
+              },
+              [_vm._v("\n      mdi-delete\n    ")]
+            )
+          ]
+        }
+      },
+      {
+        key: "no-data",
+        fn: function() {
+          return [
+            _c(
+              "v-btn",
+              { attrs: { color: "#11999e" }, on: { click: _vm.initialize } },
+              [_vm._v("Reset")]
+            )
+          ]
+        },
+        proxy: true
+      }
+    ])
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -103619,6 +104268,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Publicite_vue_vue_type_template_id_4ebd89d8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Publicite.vue?vue&type=template&id=4ebd89d8&scoped=true& */ "./resources/js/pages/Publicite.vue?vue&type=template&id=4ebd89d8&scoped=true&");
 /* harmony import */ var _Publicite_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Publicite.vue?vue&type=script&lang=js& */ "./resources/js/pages/Publicite.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vuetify-loader/lib/runtime/installComponents.js */ "./node_modules/vuetify-loader/lib/runtime/installComponents.js");
+/* harmony import */ var _node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuetify/lib/components/VBtn */ "./node_modules/vuetify/lib/components/VBtn/index.js");
+/* harmony import */ var vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuetify/lib/components/VCard */ "./node_modules/vuetify/lib/components/VCard/index.js");
+/* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/index.js");
+/* harmony import */ var vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuetify/lib/components/VDataTable */ "./node_modules/vuetify/lib/components/VDataTable/index.js");
+/* harmony import */ var vuetify_lib_components_VDialog__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuetify/lib/components/VDialog */ "./node_modules/vuetify/lib/components/VDialog/index.js");
+/* harmony import */ var vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VDivider */ "./node_modules/vuetify/lib/components/VDivider/index.js");
+/* harmony import */ var vuetify_lib_components_VFileInput__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VFileInput */ "./node_modules/vuetify/lib/components/VFileInput/index.js");
+/* harmony import */ var vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VIcon */ "./node_modules/vuetify/lib/components/VIcon/index.js");
+/* harmony import */ var vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuetify/lib/components/VSelect */ "./node_modules/vuetify/lib/components/VSelect/index.js");
+/* harmony import */ var vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuetify/lib/components/VTextField */ "./node_modules/vuetify/lib/components/VTextField/index.js");
+/* harmony import */ var vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuetify/lib/components/VToolbar */ "./node_modules/vuetify/lib/components/VToolbar/index.js");
 
 
 
@@ -103636,6 +104298,28 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null
   
 )
+
+/* vuetify-loader */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["VBtn"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCard"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardActions"],VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardText"],VCardTitle: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["VCardTitle"],VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VCol"],VDataTable: vuetify_lib_components_VDataTable__WEBPACK_IMPORTED_MODULE_7__["VDataTable"],VDialog: vuetify_lib_components_VDialog__WEBPACK_IMPORTED_MODULE_8__["VDialog"],VDivider: vuetify_lib_components_VDivider__WEBPACK_IMPORTED_MODULE_9__["VDivider"],VFileInput: vuetify_lib_components_VFileInput__WEBPACK_IMPORTED_MODULE_10__["VFileInput"],VIcon: vuetify_lib_components_VIcon__WEBPACK_IMPORTED_MODULE_11__["VIcon"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VRow"],VSelect: vuetify_lib_components_VSelect__WEBPACK_IMPORTED_MODULE_12__["VSelect"],VSpacer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_6__["VSpacer"],VTextField: vuetify_lib_components_VTextField__WEBPACK_IMPORTED_MODULE_13__["VTextField"],VToolbar: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_14__["VToolbar"],VToolbarTitle: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_14__["VToolbarTitle"]})
+
 
 /* hot reload */
 if (false) { var api; }

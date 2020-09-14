@@ -25,6 +25,7 @@ class AjoutPubliciteRequest extends FormRequest
     {
         return [
             'titre' => 'required|string',
+            'sous_titre' => 'required|string',            
             'type' => 'required|required|in:first,second,third',
             'image' => 'required|image',
         ];

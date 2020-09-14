@@ -7,7 +7,6 @@ use App\Commande;
 use App\Helpers\APIHelpers;
 use App\Http\Requests\AjoutCommandeRequest;
 use App\Http\Requests\UpdateCommandeRequest;
-use App\Panier;
 use App\Produit;
 
 class CommandeController extends Controller

@@ -16,6 +16,7 @@ class CreatePublicitesTable extends Migration
         Schema::create('publicites', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('titre');
+            $table->string('sous_titre');
             $table->enum('type',['first','second','third']);
             $table->string('image');
         });
