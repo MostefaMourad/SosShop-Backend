@@ -117,6 +117,14 @@ Route::prefix('message')->group(function () {
    Route::delete('/delete/{id}', 'MessageController@destroy');
 });
 
+Route::prefix('livraison')->group(function () {
+   Route::get('/', 'LivraisonController@index');
+   Route::post('/store', 'LivraisonController@store');
+   Route::get('/show/{id}', 'LivraisonController@show');
+   Route::patch('/update/{id}', 'LivraisonController@update');
+   Route::delete('/delete/{id}', 'LivraisonController@destroy');
+});
+
 Route::prefix('accueil')->group(function () {
    Route::get('/', 'PublicController@home');
 });

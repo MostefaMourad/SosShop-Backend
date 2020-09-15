@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Commande;
 use App\Helpers\APIHelpers;
 use App\Http\Requests\AjoutLivraisonRequest;
 use App\Http\Requests\UpdateLivraisonRequest;
 use App\Livraison;
+use App\Produit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LivraisonController extends Controller
 {
@@ -38,12 +41,14 @@ class LivraisonController extends Controller
 
     public function show($id)
     {
-        $livraison = Livraison::find($id);
-        if ($livraison == null) {
-            $response = APIHelpers::createAPIResponse(true, 204, 'livraison introuvable', null);
-        } else {
-            $response = APIHelpers::createAPIResponse(false, 200, 'livraison disponible', $livraison);
+        $commandes = DB::table('commandes')->where('livraison_id',$id)->get();
+        $i = 0;
+        $produits = [];
+        foreach ($commandes as $cmd) {
+            $produits[$i] = Produit::find($cmd->product_id);
+            $i++;
         }
+        $response = APIHelpers::createAPIResponse(false, 200, 'Détails livraison',$produits);
         return response()->json($response, 200);
     }
 
