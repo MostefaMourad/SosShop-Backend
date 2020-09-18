@@ -126,7 +126,7 @@ Route::prefix('livraison')->group(function () {
 });
 
 Route::prefix('accueil')->group(function () {
-   Route::get('/', 'PublicController@home');
+   Route::get('/', 'AccueilController@home');
 });
 
 

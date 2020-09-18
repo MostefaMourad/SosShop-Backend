@@ -267,4 +267,20 @@ const app = new Vue({
 
     
     
+detailsItem (item) {
+        this.index = this.livraisons.indexOf(item);
+        let obj = this;
+        axios.get(`http://127.0.0.1:8000/api/livraison/show/${obj.livraisons[obj.index].id}`)
+        .then(function (response) {
+          obj.produit = response.data.data;
+          obj.dialog = true;  
+          console.log(response.data);  
+        })
+        .catch(function (error) {  
+          console.log(error);
+        });
+        obj.dialog = true;  
+      },
+      
 
+     
