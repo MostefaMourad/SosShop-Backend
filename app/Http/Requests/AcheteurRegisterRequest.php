@@ -25,7 +25,10 @@ class AcheteurRegisterRequest extends FormRequest
     {
         return [
             'email' => 'required|email|unique:acheteurs,email',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
+            'nom' => 'nullable|string',
+            'prenom' => 'nullable|string',
+            'telephone' => 'nullable|string',
         ];
     }
 }
