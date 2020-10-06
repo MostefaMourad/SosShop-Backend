@@ -8,7 +8,7 @@
   >
     <template v-slot:top>
       <v-toolbar flat >
-        <v-toolbar-title>Les Clients de Sos Shop (Acheteurs) </v-toolbar-title>
+        <v-toolbar-title> Les Clients de Sos Shop (Acheteurs) </v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -93,7 +93,7 @@ import axios from 'axios';
     methods: {
       initialize () {
           let obj = this;
-          axios.get(`http://127.0.0.1:8000/api/acheteur`)
+          axios.get(`http://admin.sosbusiness.dz/api/acheteur`)
           .then(function (response) {
             obj.acheteurs = response.data.data;
           })
@@ -111,7 +111,7 @@ import axios from 'axios';
       },
       del(){
         let obj = this;
-        axios.delete(`http://127.0.0.1:8000/api/acheteur/delete/${obj.acheteurs[obj.index].id}`)
+        axios.delete(`http://admin.sosbusiness.dz/api/acheteur/delete/${obj.acheteurs[obj.index].id}`)
         .then(function (response) {
           console.log(response.data);
           obj.acheteurs.splice(obj.index, 1);

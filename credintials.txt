@@ -1,3 +1,8 @@
 $2y$10$vOLsc1ZBuu2l6U/tVpPlWuZIZUk7jlPy.tws6pJ/QsyD9VLsSyLVK
 contact@sosbusiness.dz
+p< : 6qa06d2WhMdP
 SosShop
+
+DB_DATABASE=sosbus64_sosshop
+DB_USERNAME=sosbus64
+DB_PASSWORD=6qa06d2WhMdP
